@@ -1,0 +1,56 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Mar 13 23:38:14 2022
+
+@author: Jack
+"""
+
+###uploading a .jpg as a tensor in pytorch
+
+
+from skimage.transform import resize
+from skimage.color import rgb2gray
+import matplotlib.pyplot as plt
+import numpy as np
+import torch
+import imageio
+
+###Loading image from .jpg file
+picture = imageio.imread("C:/Users/longw/Documents/neuralnets/WristFracture/Train/Fracture/1 Male (A View).jpg")
+print("NumPy: ", type(picture))
+print("Shape of Array: ", picture.shape)
+print("dtype of Array: ", picture.dtype)
+
+##showing the pic as an array of rgb values
+print(picture)
+
+##resize to fit the NN
+picture = resize(picture, (585,255), mode='constant', anti_aliasing=True)
+print(picture)
+
+##show the image to check the results
+plt.imshow(picture,cmap="gray")
+plt.show()
+
+##turn it to greyscale
+
+picture = rgb2gray(picture)
+print(picture)
+
+
+##show the grey image
+
+plt.imshow(picture,cmap="gray")
+plt.show()
+
+
+##convert the array to a tensor
+Tensor = torch.tensor(picture)
+print(Tensor)
+print(Tensor.shape)
+
+##flatten to use as an input in a NN
+Tensor = Tensor.flatten()
+print(Tensor)
+print(Tensor.shape)
+
